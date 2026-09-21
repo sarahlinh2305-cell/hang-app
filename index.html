@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#7C5CFC">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="HANG">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="HANG — Plans are better together. The social planning app for your crew.">
+  <title>HANG — Plans are better together</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <style>
+    /* Critical above-fold styles */
+    #app { opacity: 0; animation: app-appear 0.3s ease 0.1s forwards; }
+    @keyframes app-appear { to { opacity: 1; } }
+    .opacity-50 { opacity: 0.5; }
+    .opacity-50[disabled] { cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SPLASH                                                   -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-splash" class="screen active"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- ONBOARDING                                               -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-onboarding" class="screen"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- AUTH                                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-auth" class="screen"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- HOME                                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-home" class="screen">
+    <div class="offline-banner" id="offline-banner">
+      🌐 You're offline — showing saved plans
+    </div>
+    <div class="screen-body"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PLANS                                                    -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-plans" class="screen">
+    <div class="screen-header">
+      <span class="header-title" style="font-size:24px;font-weight:800;letter-spacing:-0.02em">Plans 📅</span>
+      <button class="header-btn" id="plans-add-btn" data-action="nav" data-screen="create-plan" style="background:var(--brand-primary);border-radius:var(--radius-full);color:white;width:36px;height:36px">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2V14M2 8H14" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="screen-body"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CALENDAR                                                 -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-calendar" class="screen" style="display:flex;flex-direction:column">
+    <div class="screen-body" style="padding-bottom:0;flex:1;overflow-y:auto;display:flex;flex-direction:column;-webkit-overflow-scrolling:touch"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CREW                                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-crew" class="screen">
+    <div class="screen-body"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PROFILE                                                  -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-profile" class="screen">
+    <div class="screen-body"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PLAN DETAIL                                              -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-plan-detail" class="screen" style="display:flex;flex-direction:column"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CREATE PLAN                                              -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="screen-create-plan" class="screen" style="display:flex;flex-direction:column"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- BOTTOM NAV                                               -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <nav id="bottom-nav" class="hidden"></nav>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- OVERLAYS                                                 -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="sheet-overlay"></div>
+  <div id="bottom-sheet"></div>
+  <div id="toast-container"></div>
+
+  <!-- Success overlay -->
+  <div id="success-overlay" class="success-overlay">
+    <div class="sparks"></div>
+    <div class="success-icon">✨</div>
+    <div class="success-text">Plan Created!</div>
+    <div class="success-sub">Your crew has been notified</div>
+  </div>
+
+</div><!-- #app -->
+
+<!-- Scripts -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
+<!-- PWA Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => console.log('[PWA] Service Worker registered:', reg.scope))
+        .catch(err => console.warn('[PWA] Service Worker failed:', err));
+    });
+  }
+</script>
+
+</body>
+</html>
