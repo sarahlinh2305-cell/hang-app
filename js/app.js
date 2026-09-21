@@ -1289,7 +1289,7 @@ function initOnboarding() {
   const slides = [
     { icon: '🎉', color: '#7C5CFC', title: 'Plans are better together.', sub: 'Make memories with your people — not just appointments on a calendar.' },
     { icon: '👥', color: '#FF6B9D', title: 'See what your crew is up to.', sub: "Stay in the loop. Know what's happening before you even have to ask." },
-    { icon: '📍', color: '#06D6A0', title: 'Pick a place. Pick a time. Let's go.', sub: 'Create a plan in seconds. Your crew gets notified instantly.' },
+    { icon: '📍', color: '#06D6A0', title: "Pick a place. Pick a time. Let's go.", sub: 'Create a plan in seconds. Your crew gets notified instantly.' },
     { icon: '✨', color: '#FFD166', title: 'Meet your crew.', sub: 'Start with Weekend Crew and add your people.' },
   ];
 
